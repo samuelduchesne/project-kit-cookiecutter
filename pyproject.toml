@@ -1,6 +1,6 @@
 [project]
 name = "project-kit-cookiecutter"
-version = "1.0.0b3"
+version = "1.0.0"
 description = "A python cookiecutter application to create a new python project that uses uv to manage its dependencies."
 authors = [{ name = "Samuel Letellier-Duchesne", email = "samuelduchesne@me.com" }]
 readme = "README.md"

@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import shlex
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -948,3 +949,19 @@ def test_default_emails_are_neutral():
     root = Path(__file__).parent.parent
     for template in (root, root / "node"):
         assert json.loads((template / "cookiecutter.json").read_text())["email"] == "your.name@example.com"
+
+
+@pytest.mark.skipif(shutil.which("uvx") is None, reason="needs uv")
+def test_pre_commit_leaves_tool_managed_files_alone(cookies, tmp_path):
+    """cruft and spec-kit write JSON in their own format, which the hooks must leave alone."""
+    with run_within_dir(tmp_path):
+        project = cookies.bake().project_path
+        with run_within_dir(str(project)):
+            (project / ".cruft.json").write_text('{"a": [1]}')
+            (project / ".specify").mkdir()
+            (project / ".specify/integration.json").write_text('{"a": [1]}')
+            subprocess.check_call(shlex.split("git init -q -b main"))
+            subprocess.check_call(shlex.split("git add -A"))
+            assert subprocess.call(shlex.split("uvx pre-commit run -a")) == 0
+            changed = subprocess.check_output(shlex.split("git diff --name-only"), text=True)
+            assert changed == "", f"hooks modified files:\n{changed}"

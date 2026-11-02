@@ -318,8 +318,13 @@ def test_generated_project_passes_its_checks(cookies, tmp_path):
     with run_within_dir(tmp_path):
         project = bake(cookies, publish_to_npm=True, agent_instructions="all")
         with run_within_dir(str(project)):
-            for command in ("git init -q -b main", "pnpm install", "git add -A"):
-                subprocess.check_call(shlex.split(command))
+            subprocess.check_call(shlex.split("git init -q -b main"))
+            subprocess.check_call(shlex.split("pnpm install"))
+            # cruft and spec-kit write JSON in their own format, which the hooks must leave alone.
+            (project / ".cruft.json").write_text('{\n  "a": [\n    1\n  ]\n}')
+            (project / ".specify").mkdir()
+            (project / ".specify/integration.json").write_text('{\n  "a": [\n    1\n  ]\n}')
+            subprocess.check_call(shlex.split("git add -A"))
             for command in ("make check", "make test", "make build"):
                 assert subprocess.check_call(shlex.split(command)) == 0, command
             assert (project / "dist/index.js").is_file()
