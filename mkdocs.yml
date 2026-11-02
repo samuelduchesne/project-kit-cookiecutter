@@ -1,0 +1,76 @@
+site_name: cookiecutter-project-kit
+repo_url: https://github.com/samuelduchesne/cookiecutter-project-kit
+site_url: https://samuelduchesne.github.io/cookiecutter-project-kit
+site_description: A cookiecutter template for Python projects that use uv for its dependency management
+site_author: Samuel Letellier-Duchesne
+edit_uri: edit/main/docs/
+repo_name: samuelduchesne/cookiecutter-project-kit
+copyright: Maintained by <a href="https://samuelduchesne.com">Samuel</a>.
+
+nav:
+  - Home: index.md
+  - Features:
+      - Security: features/security.md
+      - CI/CD with Github Actions: features/cicd.md
+      - Linting & code quality: features/linting.md
+      - Makefile: features/makefile.md
+      - Dependency management with uv: features/uv.md
+      - Publishing to PyPI: features/publishing.md
+      - Testing with Pytest: features/pytest.md
+      - Test coverage with codecov: features/codecov.md
+      - Documentation with MkDocs: features/mkdocs.md
+      - Compatibility testing with Tox: features/tox.md
+      - Containerization with Docker or Podman: features/docker.md
+      - Devcontainer with VSCode: features/devcontainer.md
+      - Agent Instructions: features/agents.md
+      - Data Version Control with DVC: features/dvc.md
+      - Changelog with Keep a Changelog: features/changelog.md
+      - Node (TypeScript) template: features/node.md
+  - Tutorial: tutorial.md
+  - Migrating Existing Projects: migrating.md
+  - Demo: demo.md
+  - Prompt Arguments: prompt_arguments.md
+plugins:
+  - search
+theme:
+  name: material
+  features:
+    - content.tabs.link
+    - content.code.copy
+  palette:
+    # Note: Using the system theme works with the insiders version
+    # https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/#automatic-light-dark-mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  icon:
+    repo: fontawesome/brands/github
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/samuelduchesne/cookiecutter-project-kit
+markdown_extensions:
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower

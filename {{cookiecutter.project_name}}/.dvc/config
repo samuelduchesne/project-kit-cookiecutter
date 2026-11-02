@@ -1,0 +1,7 @@
+[core]
+    autostage = true
+# Uncomment and configure your remote storage:
+# [remote "storage"]
+#     url = s3://mybucket/dvc-storage
+# [core]
+#     remote = storage

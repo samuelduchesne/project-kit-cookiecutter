@@ -1,0 +1,207 @@
+[project]
+name = "{{cookiecutter.project_name}}"
+version = "0.0.1"
+description = "{{cookiecutter.project_description}}"
+authors = [{ name = "{{cookiecutter.author}}", email = "{{cookiecutter.email}}" }]
+readme = "README.md"
+keywords = ['python']
+requires-python = ">={{cookiecutter.minimum_python_version}},<4.0"
+{%- if cookiecutter.dvc %}
+dependencies = [
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0",
+]
+{%- endif %}
+classifiers = [
+    "Intended Audience :: Developers",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+{%- set min_ver = cookiecutter.minimum_python_version %}
+{%- set versions = ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"] %}
+{%- set min_idx = versions.index(min_ver) %}
+{%- for ver in versions[min_idx:] %}
+    "Programming Language :: Python :: {{ ver }}",
+{%- endfor %}
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://{{cookiecutter.author_github_handle}}.github.io/{{cookiecutter.project_name}}/"
+Repository = "https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}"
+Documentation = "https://{{cookiecutter.author_github_handle}}.github.io/{{cookiecutter.project_name}}/"
+
+[dependency-groups]
+dev = [
+    {% if cookiecutter.minimum_python_version == "3.9" %}"pytest>=8.0.0",{% else %}"pytest>=9.0.0",{% endif %}
+    "pre-commit>=2.20.0",
+    "tox-uv>=1.11.3",
+    {%- if cookiecutter.deptry %}
+    "deptry>=0.23.0",
+    {%- endif %}
+    {% if cookiecutter.type_checker == "mypy" -%}
+        "mypy>=0.991",
+    {%- elif cookiecutter.type_checker == "ty" -%}
+        "ty==0.0.94",
+    {%- elif cookiecutter.type_checker == "pyrefly" -%}
+        "pyrefly>=1.4.0",
+    {%- elif cookiecutter.type_checker == "pyright" -%}
+        "pyright>=1.1.389",
+    {%- endif %}
+    {%- if cookiecutter.codecov %}
+    "pytest-cov>=4.0.0",
+    {%- endif %}
+    "ruff>=0.13.0",
+    {%- if cookiecutter.mkdocs %}"mkdocs>=1.4.2",
+    "mkdocs-material>=8.5.10",
+    "mkdocstrings[python]>=0.26.1",{% endif %}
+    {%- if cookiecutter.dvc %}
+    "dvc>=3.50.0",{% if cookiecutter.type_checker == "mypy" %}
+    "types-PyYAML>=6.0",{% endif %}{% endif %}
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+{% if cookiecutter.layout == "src" -%}
+[tool.hatch.build.targets.wheel]
+packages = ["src/{{cookiecutter.project_slug}}"]
+{%- else -%}
+[tool.hatch.build.targets.wheel]
+packages = ["{{cookiecutter.project_slug}}"]
+{%- endif %}
+
+{% if cookiecutter.type_checker == "mypy" -%}
+[tool.mypy]
+files = [
+    {%- if cookiecutter.layout == "src" -%}
+    "src"
+    {%- else -%}
+    "{{cookiecutter.project_slug}}"
+    {%- endif -%}
+]
+disallow_untyped_defs = true
+disallow_any_unimported = true
+no_implicit_optional = true
+check_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true
+show_error_codes = true
+{%- elif cookiecutter.type_checker == "ty" -%}
+[tool.ty.environment]
+python = "./.venv"
+python-version = "{{cookiecutter.minimum_python_version}}"
+
+[tool.ty.terminal]
+# ty is pre-1.0: keep it pinned in the dev group and fail CI on warnings too
+error-on-warning = true
+{%- elif cookiecutter.type_checker == "pyrefly" -%}
+[tool.pyrefly]
+project-includes = ["{% if cookiecutter.layout == "src" %}src{% else %}{{cookiecutter.project_slug}}{% endif %}", "tests"]
+python-version = "{{cookiecutter.minimum_python_version}}"
+preset = "strict"
+{%- elif cookiecutter.type_checker == "pyright" -%}
+[tool.pyright]
+pythonVersion = "{{cookiecutter.minimum_python_version}}"
+typeCheckingMode = "strict"
+{%- endif %}
+
+{% if cookiecutter.minimum_python_version == "3.9" -%}
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# pytest 9's `strict = true` needs Python 3.10+; these are its pytest 8 equivalents
+addopts = ["--strict-markers", "--strict-config"]
+xfail_strict = true
+{%- else -%}
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Enables strict config, markers, xfail and parametrize ids (pytest 9+)
+strict = true
+{%- endif %}
+
+[tool.ruff]
+target-version = "py{{ cookiecutter.minimum_python_version | replace('.', '') }}"
+line-length = 120
+fix = true
+
+[tool.ruff.lint]
+select = [
+    # flake8-2020
+    "YTT",
+    # flake8-bandit
+    "S",
+    # flake8-datetimez
+    "DTZ",
+    # flake8-logging
+    "LOG",
+    # flake8-pie
+    "PIE",
+    # flake8-pytest-style
+    "PT",
+    # flake8-return
+    "RET",
+    # flake8-type-checking
+    "TC",
+    # flake8-use-pathlib
+    "PTH",
+    # flake8-bugbear
+    "B",
+    # flake8-builtins
+    "A",
+    # flake8-comprehensions
+    "C4",
+    # flake8-debugger
+    "T10",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # mccabe
+    "C90",
+    # pycodestyle
+    "E", "W",
+    # pyflakes
+    "F",
+    # pygrep-hooks
+    "PGH",
+    # pyupgrade
+    "UP",
+    # ruff
+    "RUF",
+    # tryceratops
+    "TRY",
+    # perflint
+    "PERF",
+    # refurb
+    "FURB",
+]
+ignore = [
+    # LineTooLong
+    "E501",
+    # DoNotAssignLambda
+    "E731",
+]
+
+# Let TC fixes add `from __future__ import annotations` instead of quoting types
+future-annotations = true
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.ruff.format]
+preview = true
+{%- if cookiecutter.codecov %}
+
+[tool.coverage.report]
+skip_empty = true
+
+[tool.coverage.run]
+branch = true
+source = [
+    {%- if cookiecutter.layout == "src" -%}
+    "src"
+    {%- else -%}
+    "{{cookiecutter.project_slug}}"
+    {%- endif -%}
+]
+{%- endif %}

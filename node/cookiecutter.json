@@ -1,0 +1,71 @@
+{
+  "author": "Your Name",
+  "email": "your.name@example.com",
+  "author_github_handle": "your-github-handle",
+  "project_name": "example-project",
+  "project_description": "This is a template repository for TypeScript libraries that use pnpm for their dependency management.",
+  "node_version": [
+    "24",
+    "22",
+    "26"
+  ],
+  "include_github_actions": true,
+  "codecov": true,
+  "publish_to_npm": false,
+  "devcontainer": true,
+  "changelog": true,
+  "agent_instructions": [
+    "suggested",
+    "codex",
+    "claude",
+    "copilot",
+    "cursor",
+    "all",
+    "none"
+  ],
+  "agent_profile": [
+    "minimal",
+    "full"
+  ],
+  "open_source_license": [
+    "MIT license",
+    "BSD license",
+    "ISC license",
+    "Apache Software License 2.0",
+    "GNU General Public License v3",
+    "Not open source"
+  ],
+  "_extensions": [
+    "local_extensions.BooleanOverridesExtension"
+  ],
+  "__prompts__": {
+    "author_github_handle": "Your GitHub username (the 'username' part of github.com/username)",
+    "project_name": "Project name (also the npm package name: lowercase letters, digits and -)",
+    "node_version": {
+      "__prompt__": "Node.js version (minimum supported, .nvmrc and devcontainer; CI tests this one and newer)",
+      "24": "24 - active LTS (recommended)",
+      "22": "22 - maintenance LTS, maximum compatibility",
+      "26": "26 - newest LTS, least compatible"
+    },
+    "include_github_actions": "Set up GitHub Actions? (Auto-runs checks and tests on every push)",
+    "codecov": "Track test coverage with Codecov? (Shows which code lines your tests cover)",
+    "publish_to_npm": "Set up npm publishing? (Yes if you want 'pnpm add your-package' to work)",
+    "devcontainer": "Include devcontainer config? (For GitHub Codespaces or VS Code with all tools pre-installed)",
+    "changelog": "Include a CHANGELOG.md? (Keep a Changelog format, for tracking notable changes per release)",
+    "agent_instructions": {
+      "__prompt__": "Include AI coding assistant instructions?",
+      "suggested": "Suggested - Copilot + Codex/OpenAI (recommended)",
+      "codex": "Codex only - AGENTS.md for OpenAI Codex",
+      "claude": "Claude only - CLAUDE.md for Anthropic Claude",
+      "copilot": "Copilot only - .github/copilot-instructions.md",
+      "cursor": "Cursor only - .cursorrules",
+      "all": "All - include all AI assistant files",
+      "none": "None - no AI assistant instructions"
+    },
+    "agent_profile": {
+      "__prompt__": "AI instruction detail level",
+      "minimal": "Minimal - quick reference, essential commands only",
+      "full": "Full - comprehensive guidance, conventions, workflows"
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "author": "Your Name",
+  "email": "your.name@example.com",
+  "author_github_handle": "your-github-handle",
+  "project_name": "example-project",
+  "project_slug": "{{cookiecutter.project_name|lower|replace('-', '_')}}",
+  "project_description": "This is a template repository for Python projects that use uv for their dependency management.",
+  "layout": [
+    "flat",
+    "src"
+  ],
+  "minimum_python_version": [
+    "3.9",
+    "3.10",
+    "3.11",
+    "3.12",
+    "3.13",
+    "3.14"
+  ],
+  "development_python_version": [
+    "3.14",
+    "3.13",
+    "3.12",
+    "3.11",
+    "3.10",
+    "3.9"
+  ],
+  "type_checker": [
+    "pyright",
+    "ty",
+    "mypy",
+    "pyrefly"
+  ],
+  "include_py_typed": true,
+  "include_github_actions": true,
+  "codecov": true,
+  "publish_to_pypi": false,
+  "deptry": true,
+  "dockerfile": true,
+  "devcontainer": true,
+  "mkdocs": true,
+  "dvc": false,
+  "changelog": true,
+  "agent_instructions": [
+    "suggested",
+    "codex",
+    "claude",
+    "copilot",
+    "cursor",
+    "all",
+    "none"
+  ],
+  "agent_profile": [
+    "minimal",
+    "full"
+  ],
+  "open_source_license": [
+    "MIT license",
+    "BSD license",
+    "ISC license",
+    "Apache Software License 2.0",
+    "GNU General Public License v3",
+    "Not open source"
+  ],
+  "_extensions": [
+    "local_extensions.BooleanOverridesExtension"
+  ],
+  "__prompts__": {
+    "author_github_handle": "Your GitHub username (the 'username' part of github.com/username)",
+    "layout": {
+      "__prompt__": "Project layout",
+      "flat": "Flat - simpler, code in project root (recommended for small projects)",
+      "src": "src/ - code in src/ folder (recommended for published packages)"
+    },
+    "minimum_python_version": {
+      "__prompt__": "Minimum Python version (lower = more compatible, higher = newer features)",
+      "3.9": "3.9 - Maximum compatibility (some older systems)",
+      "3.10": "3.10 - match/case syntax, better error messages",
+      "3.11": "3.11 - faster, better tracebacks (recommended)",
+      "3.12": "3.12 - f-string improvements, faster still",
+      "3.13": "3.13 - free-threading and JIT (experimental), improved REPL",
+      "3.14": "3.14 - latest features, least compatible"
+    },
+    "development_python_version": {
+      "__prompt__": "Development Python version (.python-version, Docker and devcontainer images; must be >= the minimum)",
+      "3.14": "3.14 - newest (recommended)",
+      "3.13": "3.13",
+      "3.12": "3.12",
+      "3.11": "3.11",
+      "3.10": "3.10",
+      "3.9": "3.9"
+    },
+    "type_checker": {
+      "__prompt__": "Type checker (catches bugs by analyzing type hints)",
+      "pyright": "Pyright - fast, strict, great IDE support (recommended)",
+      "ty": "ty - experimental, extremely fast (by Astral/Ruff team)",
+      "mypy": "mypy - mature, widely used, more lenient",
+      "pyrefly": "Pyrefly - fast, stable 1.0 checker by Meta, easy migration from mypy"
+    },
+    "include_py_typed": "Mark package as typed? (Yes if others will import your code)",
+    "include_github_actions": "Set up GitHub Actions? (Auto-runs tests and checks on every push)",
+    "codecov": "Track test coverage with Codecov? (Shows which code lines your tests cover)",
+    "publish_to_pypi": "Set up PyPI publishing? (Yes if you want 'pip install your-package' to work)",
+    "deptry": "Check for unused/missing dependencies with deptry?",
+    "dockerfile": "Include Dockerfile? (For deploying to cloud services or sharing a reproducible environment)",
+    "devcontainer": "Include devcontainer config? (For GitHub Codespaces or VS Code with all tools pre-installed)",
+    "mkdocs": "Include MkDocs? (Generate documentation website from markdown)",
+    "dvc": "Include DVC? (Track large data files and ML experiments that Git shouldn't handle)",
+    "changelog": "Include a CHANGELOG.md? (Keep a Changelog format, for tracking notable changes per release)",
+    "agent_instructions": {
+      "__prompt__": "Include AI coding assistant instructions?",
+      "suggested": "Suggested - Copilot + Codex/OpenAI (recommended)",
+      "codex": "Codex only - AGENTS.md for OpenAI Codex",
+      "claude": "Claude only - CLAUDE.md for Anthropic Claude",
+      "copilot": "Copilot only - .github/copilot-instructions.md",
+      "cursor": "Cursor only - .cursorrules",
+      "all": "All - include all AI assistant files",
+      "none": "None - no AI assistant instructions"
+    },
+    "agent_profile": {
+      "__prompt__": "AI instruction detail level",
+      "minimal": "Minimal - quick reference, essential commands only",
+      "full": "Full - comprehensive guidance, conventions, workflows"
+    }
+  }
+}

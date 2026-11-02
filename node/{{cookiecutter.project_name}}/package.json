@@ -1,0 +1,50 @@
+{
+  "name": "{{ cookiecutter.project_name }}",
+  "version": "0.1.0",
+  "description": "{{ cookiecutter.project_description | replace('\\', '\\\\') | replace('"', '\\"') }}",
+{%- if not cookiecutter.publish_to_npm %}
+  "private": true,
+{%- endif %}
+  "keywords": [],
+  "homepage": "https://github.com/{{ cookiecutter.author_github_handle }}/{{ cookiecutter.project_name }}#readme",
+  "bugs": {
+    "url": "https://github.com/{{ cookiecutter.author_github_handle }}/{{ cookiecutter.project_name }}/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/{{ cookiecutter.author_github_handle }}/{{ cookiecutter.project_name }}.git"
+  },
+  "license": "{{ {'MIT license': 'MIT', 'BSD license': 'BSD-3-Clause', 'ISC license': 'ISC', 'Apache Software License 2.0': 'Apache-2.0', 'GNU General Public License v3': 'GPL-3.0-only'}.get(cookiecutter.open_source_license, 'UNLICENSED') }}",
+  "author": "{{ cookiecutter.author | replace('\\', '\\\\') | replace('"', '\\"') }} <{{ cookiecutter.email }}>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">={{ cookiecutter.node_version }}"
+  },
+  "packageManager": "pnpm@12.16.1",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check": "biome check .",
+    "format": "biome check --write .",
+    "typecheck": "tsc",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.4",
+    "@types/node": "{{ {'22': '22.20.5', '24': '24.19.2', '26': '26.6.6'}[cookiecutter.node_version] }}",
+    "@vitest/coverage-v8": "5.0.5",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  }
+}

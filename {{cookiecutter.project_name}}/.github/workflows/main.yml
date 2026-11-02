@@ -1,0 +1,112 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/pre-commit
+          key: {% raw %}pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}{% endraw %}
+
+      - name: Set up the environment
+        uses: ./.github/actions/setup-python-env
+
+      - name: Run checks
+        run: make check
+
+{%- set min_ver = cookiecutter.minimum_python_version %}
+{%- set versions = ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"] %}
+{%- set min_idx = versions.index(min_ver) %}
+  tests-and-type-check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [{% for ver in versions[min_idx:] %}"{{ ver }}"{% if not loop.last %}, {% endif %}{% endfor %}]
+      fail-fast: false
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up the environment
+        uses: ./.github/actions/setup-python-env
+        with:
+          python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
+
+      - name: Run tests
+        run: uv run python -m pytest tests{% if cookiecutter.codecov %} --cov --cov-config=pyproject.toml --cov-report=xml{% endif %}
+
+      - name: Check typing
+        run: uv run {% if cookiecutter.type_checker == "mypy" %}mypy{% elif cookiecutter.type_checker in ["ty", "pyrefly"] %}{{ cookiecutter.type_checker }} check{% else %}pyright{% endif %}
+{%- if cookiecutter.codecov %}
+
+      - name: Upload coverage reports to Codecov with GitHub Action on Python 3.14
+        uses: codecov/codecov-action@v4
+        if: {% raw %}${{ matrix.python-version == '3.14' }}{% endraw %}
+        env:
+          {% raw %}CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}{% endraw %}
+{%- endif %}
+{%- if cookiecutter.mkdocs %}
+
+  check-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up the environment
+        uses: ./.github/actions/setup-python-env
+
+      - name: Check if documentation can be built
+        run: uv run mkdocs build -s
+{%- endif %}
+{%- if cookiecutter.dvc %}
+
+  dvc-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up the environment
+        uses: ./.github/actions/setup-python-env
+
+      - name: Pull DVC data (if remote configured)
+        run: |
+          if uv run dvc remote list 2>/dev/null | grep -q .; then
+            echo "DVC remote found, attempting to pull data..."
+            uv run dvc pull --allow-missing || echo "Warning: Could not pull all DVC files"
+          else
+            echo "No DVC remote configured, skipping pull"
+          fi
+        env:
+          # AWS S3
+          {% raw %}AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}{% endraw %}
+          {% raw %}AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}{% endraw %}
+          # Google Cloud Storage
+          {% raw %}GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}{% endraw %}
+          # Azure Blob Storage
+          {% raw %}AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}{% endraw %}
+          {% raw %}AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}{% endraw %}
+
+      - name: Check DVC pipeline is reproducible
+        run: |
+          uv run dvc repro --dry
+          echo "DVC pipeline check complete"
+{%- endif %}

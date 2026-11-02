@@ -1,0 +1,68 @@
+# Cursor Rules for {{ cookiecutter.project_name }}
+
+This project uses uv/Ruff/{{ cookiecutter.type_checker }}/pytest stack
+
+## Environment
+
+- Use **uv** for all dependency management
+- Install: `uv sync`
+- Run commands: `uv run <command>`
+- Add dependency: `uv add <package>` (or `uv add --dev <package>`)
+
+## Quality Gate (run before commits)
+
+```bash
+uv run ruff format .
+uv run ruff check . --fix
+uv run {{ cookiecutter.type_checker }}{% if cookiecutter.type_checker in ["ty", "pyrefly"] %} check{% endif %}
+
+uv run pytest
+{%- if cookiecutter.deptry %}
+uv run deptry {% if cookiecutter.layout == "src" %}src{% else %}.{% endif %}
+
+{%- endif %}
+```
+
+Or: `make check && make test`
+{% if cookiecutter.agent_profile == "full" %}
+
+## Code Conventions
+
+- Line length: 120 characters
+- Always use `from __future__ import annotations`
+- Full type hints on all functions
+- Google/NumPy style docstrings for public APIs
+- Prefer dataclasses/Pydantic over raw dicts
+- Use `list[T]`, `dict[K, V]` over `List[T]`, `Dict[K, V]`
+- Use `| None` over `Optional[T]`
+
+## Project Structure
+
+```tree
+{% if cookiecutter.layout == "src" %}src/{% endif %}{{ cookiecutter.project_slug }}/    # Main package
+tests/              # Test files (mirror source structure)
+{%- if cookiecutter.mkdocs %}
+docs/               # MkDocs documentation
+{%- endif %}
+```
+
+## Testing
+
+- Mirror source structure in tests/
+- Name tests: `test_<function>_<scenario>_<expected>`
+- Use pytest fixtures in conftest.py
+- Run single test: `uv run pytest tests/test_file.py::test_name -v`
+{% endif %}
+
+## PR Guidelines
+
+- Small, focused PRs
+- Include/update tests
+{%- if cookiecutter.mkdocs %}
+- Update docs for API changes
+{%- endif %}
+{%- if cookiecutter.changelog %}
+- Add an entry under `## [Unreleased]` in `CHANGELOG.md` for user-facing changes, using the Keep a Changelog categories (Added, Changed, Deprecated, Removed, Fixed, Security)
+{%- if cookiecutter.agent_profile == "full" %}; create the category heading if missing, e.g. `### Fixed` then `- Handle empty input in load_config.`{% endif %}
+{%- endif %}
+- Conventional Commits: feat:, fix:, docs:, refactor:, test:, chore:

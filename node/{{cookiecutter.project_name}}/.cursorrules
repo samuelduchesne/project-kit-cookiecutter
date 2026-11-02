@@ -1,0 +1,35 @@
+# Cursor Rules for {{ cookiecutter.project_name }}
+
+You are working on a TypeScript library that uses pnpm, Biome, TypeScript and Vitest.
+
+## Commands
+
+- Install: `pnpm install`
+- Lint and format: `pnpm format`
+- Type check: `pnpm typecheck`
+- Test: `pnpm test`
+- Build: `pnpm build`
+- Full gate: `make check && make test`
+{% if cookiecutter.agent_profile == "full" %}
+## Code Style
+
+- ES modules; relative imports end in `.js`
+- Strict TypeScript, no `any`; `import type` for type-only imports
+- 120 character lines, double quotes, semicolons (Biome enforces these)
+- TSDoc on every export
+
+## Testing
+
+- Tests in `tests/*.test.ts`, importing from `../src/*.js`
+- Write a failing test before fixing a bug
+- Cover error paths
+{% endif %}
+## PR Guidelines
+
+- Small, focused PRs
+- Include/update tests
+{%- if cookiecutter.changelog %}
+- Add an entry under `## [Unreleased]` in `CHANGELOG.md` for user-facing changes, using the Keep a Changelog categories (Added, Changed, Deprecated, Removed, Fixed, Security)
+{%- if cookiecutter.agent_profile == "full" %}; create the category heading if missing, e.g. `### Fixed` then `- Reject an empty name in greet.`{% endif %}
+{%- endif %}
+- Conventional Commits: feat:, fix:, docs:, refactor:, test:, chore:

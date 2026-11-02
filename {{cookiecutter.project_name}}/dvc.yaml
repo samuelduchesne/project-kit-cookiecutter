@@ -1,0 +1,43 @@
+# DVC Pipeline Definition
+# Run with: dvc repro
+# See: https://dvc.org/doc/user-guide/project-structure/dvcyaml-files
+
+stages:
+  # Data preparation stage
+  prepare:
+    cmd: uv run python {% if cookiecutter.layout == "src" %}src/{% endif %}{{ cookiecutter.project_slug }}/prepare.py
+    deps:
+      - data/raw
+      - {% if cookiecutter.layout == "src" %}src/{% endif %}{{ cookiecutter.project_slug }}/prepare.py
+    params:
+      - prepare
+    outs:
+      - data/processed
+
+  # Example: Training stage (uncomment when ready)
+  # train:
+  #   cmd: uv run python {% if cookiecutter.layout == "src" %}src/{% endif %}{{ cookiecutter.project_slug }}/train.py
+  #   deps:
+  #     - data/processed
+  #     - {% if cookiecutter.layout == "src" %}src/{% endif %}{{ cookiecutter.project_slug }}/train.py
+  #   params:
+  #     - train
+  #   outs:
+  #     - models/model.pkl
+  #   metrics:
+  #     - metrics/metrics.json:
+  #         cache: false
+
+  # Example: Evaluation stage (uncomment when ready)
+  # evaluate:
+  #   cmd: uv run python {% if cookiecutter.layout == "src" %}src/{% endif %}{{ cookiecutter.project_slug }}/evaluate.py
+  #   deps:
+  #     - models/model.pkl
+  #     - data/processed
+  #     - {% if cookiecutter.layout == "src" %}src/{% endif %}{{ cookiecutter.project_slug }}/evaluate.py
+  #   metrics:
+  #     - metrics/eval.json:
+  #         cache: false
+  #   plots:
+  #     - plots/confusion_matrix.png:
+  #         cache: false

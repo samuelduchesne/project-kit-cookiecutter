@@ -1,0 +1,94 @@
+{
+  "$defs": {
+    "EvaluateParams": {
+      "description": "Parameters for the model evaluation stage.",
+      "properties": {
+        "threshold": {
+          "default": 0.5,
+          "description": "Classification threshold",
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Threshold",
+          "type": "number"
+        }
+      },
+      "title": "EvaluateParams",
+      "type": "object"
+    },
+    "PrepareParams": {
+      "description": "Parameters for the data preparation stage.",
+      "properties": {
+        "seed": {
+          "default": 42,
+          "description": "Random seed for reproducibility",
+          "title": "Seed",
+          "type": "integer"
+        },
+        "test_split": {
+          "default": 0.2,
+          "description": "Fraction of data to use for testing",
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Test Split",
+          "type": "number"
+        }
+      },
+      "title": "PrepareParams",
+      "type": "object"
+    },
+    "TrainParams": {
+      "description": "Parameters for the model training stage.",
+      "properties": {
+        "epochs": {
+          "default": 10,
+          "description": "Number of training epochs",
+          "minimum": 1,
+          "title": "Epochs",
+          "type": "integer"
+        },
+        "learning_rate": {
+          "default": 0.001,
+          "description": "Learning rate for optimizer",
+          "exclusiveMinimum": 0.0,
+          "title": "Learning Rate",
+          "type": "number"
+        },
+        "batch_size": {
+          "default": 32,
+          "description": "Batch size for training",
+          "minimum": 1,
+          "title": "Batch Size",
+          "type": "integer"
+        }
+      },
+      "title": "TrainParams",
+      "type": "object"
+    }
+  },
+  "description": "Root schema for all DVC pipeline parameters.\n\nThis schema validates the structure of params.yaml.\nUpdate this schema when adding or modifying pipeline parameters.",
+  "properties": {
+    "prepare": {
+      "$ref": "#/$defs/PrepareParams",
+      "default": {
+        "seed": 42,
+        "test_split": 0.2
+      }
+    },
+    "train": {
+      "$ref": "#/$defs/TrainParams",
+      "default": {
+        "epochs": 10,
+        "learning_rate": 0.001,
+        "batch_size": 32
+      }
+    },
+    "evaluate": {
+      "$ref": "#/$defs/EvaluateParams",
+      "default": {
+        "threshold": 0.5
+      }
+    }
+  },
+  "title": "PipelineParams",
+  "type": "object"
+}

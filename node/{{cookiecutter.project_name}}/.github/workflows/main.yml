@@ -1,0 +1,77 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/pre-commit
+          key: {% raw %}pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}{% endraw %}
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Run checks (installs dependencies from the lockfile first)
+        run: make check
+
+{%- set versions = ["22", "24", "26"] %}
+{%- set min_idx = versions.index(cookiecutter.node_version) %}
+
+  tests-and-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [{% for ver in versions[min_idx:] %}"{{ ver }}"{% if not loop.last %}, {% endif %}{% endfor %}]
+      fail-fast: false
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: {% raw %}${{ matrix.node-version }}{% endraw %}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run tests
+        run: pnpm {% if cookiecutter.codecov %}test:coverage{% else %}test{% endif %}
+
+      - name: Build
+        run: pnpm build
+{%- if cookiecutter.codecov %}
+
+      - name: Upload coverage reports to Codecov on Node.js {{ cookiecutter.node_version }}
+        uses: codecov/codecov-action@v4
+        if: matrix.node-version == '{{ cookiecutter.node_version }}'
+        env:
+          {% raw %}CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}{% endraw %}
+{%- endif %}

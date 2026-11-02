@@ -1,0 +1,7 @@
+# Ignore data files (tracked by DVC instead)
+# Keep .dvc tracking files and .gitkeep markers
+*
+!.gitignore
+!.gitkeep
+!**/.gitkeep
+!*.dvc
