@@ -93,7 +93,7 @@ If you just created this project from the cookiecutter template:
    git push
    ```
 
-For detailed setup instructions, see the [cookiecutter-project-kit tutorial](https://samuelduchesne.github.io/cookiecutter-project-kit/tutorial/).
+For detailed setup instructions, see the [project-kit-cookiecutter tutorial](https://samuelduchesne.github.io/project-kit-cookiecutter/tutorial/).
 {% if cookiecutter.publish_to_pypi %}
 
 ## Releasing
@@ -102,7 +102,7 @@ For detailed setup instructions, see the [cookiecutter-project-kit tutorial](htt
 2. Commit and push
 3. Create a [new release](https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}/releases/new) on GitHub with a tag matching the version (e.g., `1.0.0`)
 
-The GitHub Action will automatically publish to PyPI. See the [publishing guide](https://samuelduchesne.github.io/cookiecutter-project-kit/features/publishing/) for initial setup.
+The GitHub Action will automatically publish to PyPI. See the [publishing guide](https://samuelduchesne.github.io/project-kit-cookiecutter/features/publishing/) for initial setup.
 {%- if cookiecutter.mkdocs %}
 
 > **First release?** After the workflow completes, enable GitHub Pages: go to `Settings > Pages` and select the `gh-pages` branch.
@@ -115,4 +115,4 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for gui
 
 ---
 
-*Built with [cookiecutter-project-kit](https://github.com/samuelduchesne/cookiecutter-project-kit)*
+*Built with [project-kit-cookiecutter](https://github.com/samuelduchesne/project-kit-cookiecutter)*

@@ -62,7 +62,7 @@ Images for Python versions past end-of-life no longer receive updates.
 
 > **Boolean options on the command line:** the `true`/`false` options below accept any of `true`/`false`,
 > `yes`/`no`, `y`/`n`, `on`/`off` and `1`/`0`, in any case, e.g.
-> `uvx cookiecutter gh:samuelduchesne/cookiecutter-project-kit --no-input changelog=false dvc=yes`.
+> `uvx cookiecutter gh:samuelduchesne/project-kit-cookiecutter --no-input changelog=false dvc=yes`.
 > Any other value stops generation with an error.
 
 **include_github_actions**

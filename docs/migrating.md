@@ -20,7 +20,7 @@ Navigate to your existing project and link it to the template:
 
 ```bash
 cd my-existing-project
-cruft link gh:samuelduchesne/cookiecutter-project-kit
+cruft link gh:samuelduchesne/project-kit-cookiecutter
 ```
 
 Cruft will prompt you for the template variables (project name, author, etc.). Answer them to match your existing project.
@@ -61,7 +61,7 @@ Some files shouldn't be updated from the template (e.g., your actual source code
 
 ```json
 {
-  "template": "gh:samuelduchesne/cookiecutter-project-kit",
+  "template": "gh:samuelduchesne/project-kit-cookiecutter",
   "commit": "abc123...",
   "context": {
     "cookiecutter": {
@@ -97,7 +97,7 @@ If you prefer not to use Cruft, you can manually adopt template practices:
 
 ```bash
 # Create a fresh project with your settings
-uvx cookiecutter gh:samuelduchesne/cookiecutter-project-kit -o /tmp/reference
+uvx cookiecutter gh:samuelduchesne/project-kit-cookiecutter -o /tmp/reference
 ```
 
 ### 2. Copy Configuration Files
@@ -132,7 +132,7 @@ For heavily divergent projects, it may be easier to:
 
 ```bash
 # Create new project
-uvx cookiecutter gh:samuelduchesne/cookiecutter-project-kit
+uvx cookiecutter gh:samuelduchesne/project-kit-cookiecutter
 
 # Copy your code
 cp -r old-project/src/* new-project/src/

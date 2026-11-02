@@ -1,10 +1,10 @@
-site_name: cookiecutter-project-kit
-repo_url: https://github.com/samuelduchesne/cookiecutter-project-kit
-site_url: https://samuelduchesne.github.io/cookiecutter-project-kit
+site_name: project-kit-cookiecutter
+repo_url: https://github.com/samuelduchesne/project-kit-cookiecutter
+site_url: https://samuelduchesne.github.io/project-kit-cookiecutter
 site_description: A cookiecutter template for Python projects that use uv for its dependency management
 site_author: Samuel Letellier-Duchesne
 edit_uri: edit/main/docs/
-repo_name: samuelduchesne/cookiecutter-project-kit
+repo_name: samuelduchesne/project-kit-cookiecutter
 copyright: Maintained by <a href="https://samuelduchesne.com">Samuel</a>.
 
 nav:
@@ -60,7 +60,7 @@ theme:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/samuelduchesne/cookiecutter-project-kit
+      link: https://github.com/samuelduchesne/project-kit-cookiecutter
 markdown_extensions:
   - toc:
       permalink: true

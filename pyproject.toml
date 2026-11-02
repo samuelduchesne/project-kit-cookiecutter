@@ -1,5 +1,5 @@
 [project]
-name = "cookiecutter-project-kit"
+name = "project-kit-cookiecutter"
 version = "1.0.0b3"
 description = "A python cookiecutter application to create a new python project that uses uv to manage its dependencies."
 authors = [{ name = "Samuel Letellier-Duchesne", email = "samuelduchesne@me.com" }]
@@ -27,9 +27,9 @@ classifiers = [
 
 
 [project.urls]
-Repository = "https://github.com/samuelduchesne/cookiecutter-project-kit"
-Documentation = "https://samuelduchesne.github.io/cookiecutter-project-kit/"
-Homepage = "https://samuelduchesne.github.io/cookiecutter-project-kit/"
+Repository = "https://github.com/samuelduchesne/project-kit-cookiecutter"
+Documentation = "https://samuelduchesne.github.io/project-kit-cookiecutter/"
+Homepage = "https://samuelduchesne.github.io/project-kit-cookiecutter/"
 
 [dependency-groups]
 dev = [
@@ -52,10 +52,10 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.setuptools]
-packages = ["cookiecutter_project_kit"]
+packages = ["project_kit_cookiecutter"]
 
 [tool.setuptools.package-data]
-"cookiecutter_project_kit" = ["*"]
+"project_kit_cookiecutter" = ["*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -66,12 +66,12 @@ skip_empty = true
 
 [tool.coverage.run]
 branch = true
-source = ["cookiecutter_project_kit"]
+source = ["project_kit_cookiecutter"]
 parallel = true
 data_file = ".coverage/coverage"
 
 [tool.mypy]
-files = ['cookiecutter_project_kit']
+files = ['project_kit_cookiecutter']
 disallow_untyped_defs = true
 disallow_any_unimported = true
 no_implicit_optional = true

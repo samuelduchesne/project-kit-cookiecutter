@@ -1,19 +1,19 @@
 # Node (TypeScript) template
 
-cookiecutter-project-kit also holds a template for TypeScript libraries, in the `node/` folder of the repository. It applies the same standards as the Python template (linting and formatting through pre-commit, a Keep a Changelog `CHANGELOG.md`, agent instructions, GitHub Actions, a license choice and a devcontainer) to a Node project.
+project-kit-cookiecutter also holds a template for TypeScript libraries, in the `node/` folder of the repository. It applies the same standards as the Python template (linting and formatting through pre-commit, a Keep a Changelog `CHANGELOG.md`, agent instructions, GitHub Actions, a license choice and a devcontainer) to a Node project.
 
 ## Generate a project
 
 Pass the folder with `--directory`:
 
 ```bash
-uvx cookiecutter https://github.com/samuelduchesne/cookiecutter-project-kit.git --directory node
+uvx cookiecutter https://github.com/samuelduchesne/project-kit-cookiecutter.git --directory node
 ```
 
 With [cruft](https://cruft.github.io/cruft/), so the project can be updated later:
 
 ```bash
-uvx cruft create https://github.com/samuelduchesne/cookiecutter-project-kit.git --directory node
+uvx cruft create https://github.com/samuelduchesne/project-kit-cookiecutter.git --directory node
 ```
 
 The project-kit plugin's `new-project` workflow does this for you when you ask for a Node project.

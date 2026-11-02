@@ -40,13 +40,13 @@ create a project directory, and run the following command:
 === "macOS / Linux"
 
     ```bash
-    uvx cookiecutter https://github.com/samuelduchesne/cookiecutter-project-kit.git
+    uvx cookiecutter https://github.com/samuelduchesne/project-kit-cookiecutter.git
     ```
 
 === "Windows (PowerShell)"
 
     ```powershell
-    uvx cookiecutter https://github.com/samuelduchesne/cookiecutter-project-kit.git
+    uvx cookiecutter https://github.com/samuelduchesne/project-kit-cookiecutter.git
     ```
 
 For an explanation of the prompt arguments, see

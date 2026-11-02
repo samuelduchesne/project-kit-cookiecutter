@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Initial project scaffold generated from [cookiecutter-project-kit](https://github.com/samuelduchesne/cookiecutter-project-kit).
+- Initial project scaffold generated from [project-kit-cookiecutter](https://github.com/samuelduchesne/project-kit-cookiecutter).
 
 [Unreleased]: https://github.com/<handle>/<project_name>/commits/main
 ```
@@ -73,7 +73,7 @@ A few rules keep the file useful:
 
 ### Added
 
-- Initial project scaffold generated from [cookiecutter-project-kit](https://github.com/samuelduchesne/cookiecutter-project-kit).
+- Initial project scaffold generated from [project-kit-cookiecutter](https://github.com/samuelduchesne/project-kit-cookiecutter).
 
 [Unreleased]: https://github.com/<handle>/<project_name>/compare/0.1.0...HEAD
 [0.1.0]: https://github.com/<handle>/<project_name>/releases/tag/0.1.0

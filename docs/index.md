@@ -48,20 +48,20 @@ Then, navigate to the directory where you want to create your project and run:
 === "macOS / Linux"
 
     ```bash
-    uvx cookiecutter https://github.com/samuelduchesne/cookiecutter-project-kit.git
+    uvx cookiecutter https://github.com/samuelduchesne/project-kit-cookiecutter.git
     ```
 
 === "Windows (PowerShell)"
 
     ```powershell
-    uvx cookiecutter https://github.com/samuelduchesne/cookiecutter-project-kit.git
+    uvx cookiecutter https://github.com/samuelduchesne/project-kit-cookiecutter.git
     ```
 
 Or if you prefer using pip:
 
 ```bash
 pip install cookiecutter
-cookiecutter https://github.com/samuelduchesne/cookiecutter-project-kit.git
+cookiecutter https://github.com/samuelduchesne/project-kit-cookiecutter.git
 ```
 
 Follow the prompts to configure your project. Once completed, a new directory containing your project will be created. Then navigate into your newly created project directory and follow the instructions in the `README.md` to complete the setup of your project.

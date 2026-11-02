@@ -11,15 +11,15 @@ bake-with-inputs: ## bake with inputs and overwrite if exists.
 	@uv run cookiecutter . --overwrite-if-exists
 
 .PHONY: bake-and-test-deploy
-bake-and-test-deploy: ## For quick publishing to cookiecutter-project-kit-example to test GH Actions
-	@rm -rf cookiecutter-project-kit-example || true
+bake-and-test-deploy: ## For quick publishing to project-kit-cookiecutter-example to test GH Actions
+	@rm -rf project-kit-cookiecutter-example || true
 	@uv run cookiecutter --no-input . --overwrite-if-exists \
 		author="Samuel Letellier-Duchesne" \
 		email="samuelduchesne@me.com" \
 		github_author_handle=samuelduchesne \
-		project_name=cookiecutter-project-kit-example \
-		project_slug=cookiecutter_project_kit_example
-	@cd cookiecutter-project-kit-example; uv sync && \
+		project_name=project-kit-cookiecutter-example \
+		project_slug=project_kit_cookiecutter_example
+	@cd project-kit-cookiecutter-example; uv sync && \
 		git init -b main && \
 		git add . && \
 		uv run pre-commit install && \
@@ -28,7 +28,7 @@ bake-and-test-deploy: ## For quick publishing to cookiecutter-project-kit-exampl
 		uv run pre-commit run -a || true && \
 		git add . && \
 		git commit -m "init commit" && \
-		git remote add origin git@github.com:samuelduchesne/cookiecutter-project-kit-example.git && \
+		git remote add origin git@github.com:samuelduchesne/project-kit-cookiecutter-example.git && \
 		git push -f origin main
 
 

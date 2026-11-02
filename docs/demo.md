@@ -7,14 +7,14 @@ This guide provides a 5-minute live demonstration script for showcasing the cook
     === "macOS / Linux"
 
         ```bash
-        uvx cookiecutter gh:samuelduchesne/cookiecutter-project-kit --no-input
+        uvx cookiecutter gh:samuelduchesne/project-kit-cookiecutter --no-input
         cd example-project && git init && git add . && make install
         ```
 
     === "Windows (PowerShell)"
 
         ```powershell
-        uvx cookiecutter gh:samuelduchesne/cookiecutter-project-kit --no-input
+        uvx cookiecutter gh:samuelduchesne/project-kit-cookiecutter --no-input
         cd example-project
         git init
         git add .
@@ -64,13 +64,13 @@ This guide provides a 5-minute live demonstration script for showcasing the cook
 === "macOS / Linux"
 
     ```bash
-    uvx cookiecutter gh:samuelduchesne/cookiecutter-project-kit
+    uvx cookiecutter gh:samuelduchesne/project-kit-cookiecutter
     ```
 
 === "Windows (PowerShell)"
 
     ```powershell
-    uvx cookiecutter gh:samuelduchesne/cookiecutter-project-kit
+    uvx cookiecutter gh:samuelduchesne/project-kit-cookiecutter
     ```
 
 ### Answer the prompts
@@ -290,7 +290,7 @@ If something goes wrong:
     cd /tmp && rm -rf example-project
 
     # Skip prompts with defaults
-    uvx cookiecutter gh:samuelduchesne/cookiecutter-project-kit --no-input
+    uvx cookiecutter gh:samuelduchesne/project-kit-cookiecutter --no-input
 
     # Quick setup after generation
     cd example-project && git init && git add . && make install
@@ -304,7 +304,7 @@ If something goes wrong:
     Remove-Item -Recurse -Force example-project -ErrorAction SilentlyContinue
 
     # Skip prompts with defaults
-    uvx cookiecutter gh:samuelduchesne/cookiecutter-project-kit --no-input
+    uvx cookiecutter gh:samuelduchesne/project-kit-cookiecutter --no-input
 
     # Quick setup after generation
     cd example-project

@@ -28,7 +28,7 @@ def template_dir(tmp_path_factory) -> Path:
 
     Baking from the repository root makes the pre_prompt hook copy the whole checkout, ``.venv`` included.
     """
-    target = tmp_path_factory.mktemp("template") / "cookiecutter-project-kit"
+    target = tmp_path_factory.mktemp("template") / "project-kit-cookiecutter"
     target.mkdir()
     for name in ("cookiecutter.json", "local_extensions.py"):
         shutil.copy2(REPO_ROOT / name, target / name)

@@ -4,10 +4,10 @@
 
 ---
 
-[![Build status](https://img.shields.io/github/actions/workflow/status/samuelduchesne/cookiecutter-project-kit/main.yml?branch=main)](https://github.com/samuelduchesne/cookiecutter-project-kit/actions/workflows/main.yml?query=branch%3Amain)
-[![Supported Python versions](https://img.shields.io/badge/python-3.9_%7C_3.10_%7C_3.11_%7C_3.12_%7C_3.13_%7C_3.14-blue?labelColor=grey&color=blue)](https://github.com/samuelduchesne/cookiecutter-project-kit/blob/main/pyproject.toml)
-[![Docs](https://img.shields.io/badge/docs-gh--pages-blue)](https://samuelduchesne.github.io/cookiecutter-project-kit/)
-[![License](https://img.shields.io/github/license/samuelduchesne/cookiecutter-project-kit)](https://github.com/samuelduchesne/cookiecutter-project-kit/blob/main/LICENSE)
+[![Build status](https://img.shields.io/github/actions/workflow/status/samuelduchesne/project-kit-cookiecutter/main.yml?branch=main)](https://github.com/samuelduchesne/project-kit-cookiecutter/actions/workflows/main.yml?query=branch%3Amain)
+[![Supported Python versions](https://img.shields.io/badge/python-3.9_%7C_3.10_%7C_3.11_%7C_3.12_%7C_3.13_%7C_3.14-blue?labelColor=grey&color=blue)](https://github.com/samuelduchesne/project-kit-cookiecutter/blob/main/pyproject.toml)
+[![Docs](https://img.shields.io/badge/docs-gh--pages-blue)](https://samuelduchesne.github.io/project-kit-cookiecutter/)
+[![License](https://img.shields.io/github/license/samuelduchesne/project-kit-cookiecutter)](https://github.com/samuelduchesne/project-kit-cookiecutter/blob/main/LICENSE)
 
 This is a modern Cookiecutter template that can be used to initiate a Python project with all the necessary tools for development, testing, and deployment. It supports the following features:
 
@@ -26,12 +26,12 @@ This is a modern Cookiecutter template that can be used to initiate a Python pro
 - Changelog in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format, wired into the agent instructions
 - Optional instructions for configuring coding agents and automation (`AGENTS.md`, `CLAUDE.md`)
 
-A second template, in `node/`, generates TypeScript libraries with the same standards: pnpm, Biome through pre-commit, Vitest, a Keep a Changelog `CHANGELOG.md`, agent instructions and optional npm publishing. See [Node (TypeScript) template](https://samuelduchesne.github.io/cookiecutter-project-kit/features/node/).
+A second template, in `node/`, generates TypeScript libraries with the same standards: pnpm, Biome through pre-commit, Vitest, a Keep a Changelog `CHANGELOG.md`, agent instructions and optional npm publishing. See [Node (TypeScript) template](https://samuelduchesne.github.io/project-kit-cookiecutter/features/node/).
 
 ---
 
 <p align="center">
-  <a href="https://samuelduchesne.github.io/cookiecutter-project-kit/">Documentation</a>
+  <a href="https://samuelduchesne.github.io/project-kit-cookiecutter/">Documentation</a>
 </p>
 
 ---
@@ -42,20 +42,20 @@ On your local machine, navigate to the directory in which you want to
 create a project directory, and run the following command:
 
 ```bash
-uvx cookiecutter https://github.com/samuelduchesne/cookiecutter-project-kit.git
+uvx cookiecutter https://github.com/samuelduchesne/project-kit-cookiecutter.git
 ```
 
 or if you don't have `uv` installed yet:
 
 ```bash
 pip install cookiecutter
-cookiecutter https://github.com/samuelduchesne/cookiecutter-project-kit.git
+cookiecutter https://github.com/samuelduchesne/project-kit-cookiecutter.git
 ```
 
 For a TypeScript library, add `--directory node`:
 
 ```bash
-uvx cookiecutter https://github.com/samuelduchesne/cookiecutter-project-kit.git --directory node
+uvx cookiecutter https://github.com/samuelduchesne/project-kit-cookiecutter.git --directory node
 ```
 
 Follow the prompts to configure your project. Once completed, a new directory containing your project will be created. Then navigate into your newly created project directory and follow the instructions in the `README.md` to complete the setup of your project.

@@ -78,4 +78,4 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for gui
 
 ---
 
-_Built with [cookiecutter-project-kit](https://github.com/samuelduchesne/cookiecutter-project-kit)_
+_Built with [project-kit-cookiecutter](https://github.com/samuelduchesne/project-kit-cookiecutter)_
