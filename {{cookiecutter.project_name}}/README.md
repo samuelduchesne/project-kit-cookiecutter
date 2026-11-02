@@ -72,25 +72,15 @@ make docker-run    # Run Docker container
 If you just created this project from the cookiecutter template:
 
 1. Create a GitHub repository with the same name
-2. Push your code:
+2. Install dependencies, which creates `uv.lock`, then commit and push. CI needs the lock file.
 
    ```bash
    git init -b main
+   make install
    git add .
    git commit -m "Initial commit"
    git remote add origin git@github.com:{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}.git
    git push -u origin main
-   ```
-
-3. Install dependencies: `make install`
-4. Fix formatting and commit:
-
-   ```bash
-   git add .
-   uv run pre-commit run -a
-   git add .
-   git commit -m "Apply formatting"
-   git push
    ```
 
 For detailed setup instructions, see the [project-kit-cookiecutter tutorial](https://samuelduchesne.github.io/project-kit-cookiecutter/tutorial/).

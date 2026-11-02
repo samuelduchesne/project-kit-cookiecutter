@@ -59,46 +59,15 @@ it a name that only contains alphanumeric characters and optionally `-`.
 DO NOT check any boxes under the option `Initialize this repository
 with`.
 
-## Step 4: Upload your project to Github
+## Step 4: Initialize git and install the environment
 
-Run the following commands, replacing `<project-name>` with the name
-that you also gave the Github repository and `<github_author_handle>`
-with your Github username.
+Run the following commands, replacing `<project_name>` with the name of your project.
 
 === "macOS / Linux"
 
     ```bash
     cd <project_name>
     git init -b main
-    git add .
-    git commit -m "Init commit"
-    git remote add origin git@github.com:<github_author_handle>/<project_name>.git
-    git push -u origin main
-    ```
-
-=== "Windows (PowerShell)"
-
-    ```powershell
-    cd <project_name>
-    git init -b main
-    git add .
-    git commit -m "Init commit"
-    git remote add origin git@github.com:<github_author_handle>/<project_name>.git
-    git push -u origin main
-    ```
-
-## Step 5: Set Up Your Development Environment
-
-Initially, the CI/CD pipeline will fail for two reasons:
-
-- The project does not yet contain a `uv.lock` file
-- There are a few formatting issues in the project
-
-To fix that, we first install the environment and the pre-commit hooks:
-
-=== "macOS / Linux"
-
-    ```bash
     make install
     ```
 
@@ -107,53 +76,42 @@ To fix that, we first install the environment and the pre-commit hooks:
     Windows does not include `make` by default. You can either [install make](#windows-installing-make) or run the commands directly:
 
     ```powershell
+    cd <project_name>
+    git init -b main
     uv sync
     uv run pre-commit install
     ```
 
-This will generate the `uv.lock` file.
+This generates the `uv.lock` file, which the CI/CD pipeline needs.
 
-## Step 6: Run the pre-commit hooks
+## Step 5: Run the pre-commit hooks
 
-Now, to resolve the formatting issues, stage your files and run the pre-commit hooks:
+Stage your files and run the pre-commit hooks:
 
-=== "macOS / Linux"
-
-    ```bash
-    git add .
-    uv run pre-commit run -a
-    ```
-
-=== "Windows (PowerShell)"
-
-    ```powershell
-    git add .
-    uv run pre-commit run -a
-    ```
+```bash
+git add .
+uv run pre-commit run -a
+```
 
 > **Note:** Pre-commit only checks staged files. Without `git add .` first, you'll see "no files to check".
 
-You may see some hooks show "Failed" with "files were modified by this hook" — **this is normal!** It means the hooks automatically fixed formatting issues. The files have been updated and are ready to commit.
+If a hook shows "Failed" with "files were modified by this hook", it has fixed the files for you. Stage them in the next step.
 
-## Step 7: Commit the changes
+## Step 6: Commit the project
 
-Now we commit the changes made by the two steps above to the repository:
+```bash
+git add .
+git commit -m "Init commit"
+```
 
-=== "macOS / Linux"
+## Step 7: Upload your project to Github
 
-    ```bash
-    git add .
-    git commit -m 'Fix formatting issues'
-    git push origin main
-    ```
+Run the following commands, replacing `<project_name>` with the name that you also gave the Github repository and `<github_author_handle>` with your Github username.
 
-=== "Windows (PowerShell)"
-
-    ```powershell
-    git add .
-    git commit -m "Fix formatting issues"
-    git push origin main
-    ```
+```bash
+git remote add origin git@github.com:<github_author_handle>/<project_name>.git
+git push -u origin main
+```
 
 ## Step 8: Set up Codecov (optional)
 

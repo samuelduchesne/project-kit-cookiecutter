@@ -1,3 +1,6 @@
+# cruft and spec-kit write these files themselves, so the hooks leave their formatting alone.
+exclude: ^(\.cruft\.json|\.specify/.*)$
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: "v6.0.0"
